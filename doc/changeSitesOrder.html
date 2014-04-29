@@ -1,0 +1,274 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>changeSitesOrder</title><meta name="generator" content="MATLAB 8.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2014-04-09"><meta name="DC.source" content="changeSitesOrder.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">DESCRIPTION</a></li><li><a href="#3">WORKFLOW</a></li></ul></div><h2>DESCRIPTION<a name="2"></a></h2><p>La fonction changeOrderTargetPoint vous permet de changer graphiquement l'ordre de visite des sites</p><h2>WORKFLOW<a name="3"></a></h2><div><ol><li>Lancez la fonction</li><li>Red&eacute;finissez la trajectoire</li><li>Sauvegardez la trajectoire</li></ol></div><p>Etape 1 : <b>Lancez la fonction</b></p><pre class="language-matlab">changeSitesOrder
+</pre><p>Vous devriez voir la photo ci-dessous o&ugrave; :</p><div><ul><li>Le point bleu avec le chiffre rouge 0 d&eacute;signe la position initiale du robot</li><li>Les ronds oranges repr&eacute;sentent les sites &agrave; visiter</li><li>Le trait pointill&eacute; bleu repr&eacute;sente la trajectoire originelle du robot</li></ul></div><p><img vspace="5" hspace="5" src="matlabDoc/changeSitesOrder_startScreen.jpg" alt=""> </p><p>Etape 2 : <b>Red&eacute;finissez la trajectoire</b></p><p>Cliquez avec le bouton droit de la souris sur un des points orange pour d&eacute;finir le premier site &agrave; faire explorer au robot :</p><p><img vspace="5" hspace="5" src="matlabDoc/changeSitesOrder_firstClick.jpg" alt=""> </p><p>Cliquez de nouveau avec le bouton droit de la souris pour d&eacute;terminer le prochain site &agrave; faire explorer au robot :</p><p><img vspace="5" hspace="5" src="matlabDoc/changeSitesOrder_secondClick.jpg" alt=""> </p><p>Etape 3 : <b>Sauvegardez la trajectoire</b></p><p>Cliquez ensuite sur tous les cercles orange (qui deviennent bleu lorsque vous cliquez dessus) pour d&eacute;finir votre nouvelle trajectoire :</p><p><img vspace="5" hspace="5" src="matlabDoc/changeSitesOrder_allClick.jpg" alt=""> </p><p>Cliquez sur la croix dans le coin sup&eacute;rieur droit de la fen&ecirc;tre pour fermer la fonction. Une boite de dialogue vous demande alors si vous voulez sauvegarder la nouvelle trajectoire.</p><p>Si vous r&eacute;pondez par l'affirmative, la nouvelles trajectoire se subtituera &agrave; l'ancienne en &eacute;crasant le fichier Sites.M. La pr&eacute;c&eacute;dante version du fichier Sites.m est renomm&eacute; site.m_ <i>DATE</i> .bak avec <i>DATE</i> la date courrante avec le format yyyy <b>_</b> mm <b>_</b> dd <b>_</b> HH <b>H</b> MM <b>M</b> SS <b>.</b> FFF <b>s</b> (voir la documentation de la fonction <b>datenum</b> pour comprendre le format) :</p><p><img vspace="5" hspace="5" src="matlabDoc/changeSitesOrder_savedScreen.jpg" alt=""> </p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2014a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+function changeSitesOrder()
+%% DESCRIPTION
+% La fonction changeOrderTargetPoint vous permet de changer graphiquement
+% l'ordre de visite des sites
+%% WORKFLOW
+% 
+%
+% # Lancez la fonction
+% # Redéfinissez la trajectoire
+% # Sauvegardez la trajectoire
+%
+% Etape 1 : *Lancez la fonction*
+% 
+%   changeSitesOrder
+%
+% Vous devriez voir la photo ci-dessous où :
+%
+%
+% * Le point bleu avec le chiffre rouge 0 désigne la position initiale du
+% robot
+% * Les ronds oranges représentent les sites à visiter
+% * Le trait pointillé bleu représente la trajectoire originelle du robot
+%%
+% 
+% <<matlabDoc/changeSitesOrder_startScreen.jpg>>
+% 
+% Etape 2 : *Redéfinissez la trajectoire*
+%
+% Cliquez avec le bouton droit de la souris sur un des points orange pour
+% définir le premier site à faire explorer au robot :
+%%
+% 
+% <<matlabDoc/changeSitesOrder_firstClick.jpg>>
+% 
+% Cliquez de nouveau avec le bouton droit de la souris pour déterminer le
+% prochain site à faire explorer au robot :
+%%
+% 
+% <<matlabDoc/changeSitesOrder_secondClick.jpg>>
+% 
+% Etape 3 : *Sauvegardez la trajectoire*
+%
+% Cliquez ensuite sur tous les cercles orange (qui deviennent bleu lorsque
+% vous cliquez dessus) pour définir votre nouvelle trajectoire :
+%%
+% 
+% <<matlabDoc/changeSitesOrder_allClick.jpg>>
+% 
+% Cliquez sur la croix dans le coin supérieur droit de la fenêtre pour
+% fermer la fonction. Une boite de dialogue vous demande alors si vous
+% voulez sauvegarder la nouvelle trajectoire.
+%
+% Si vous répondez par l'affirmative, la nouvelles trajectoire se
+% subtituera à l'ancienne en écrasant le fichier Sites.M. La précédante
+% version du fichier Sites.m est renommé site.m_ _DATE_ .bak avec _DATE_ la
+% date courrante avec le format yyyy *_* mm *_* dd *_* HH *H* MM *M* SS *.*
+% FFF *s* (voir la documentation de la fonction *datenum* pour comprendre
+% le format) :
+%%
+% 
+% <<matlabDoc/changeSitesOrder_savedScreen.jpg>>
+% 
+
+% get the start position
+loadRobotParameters;
+
+% Get an instance of SimDisplay (interface used to display robot evolution)
+simApp = SimDisplay.getInstance();
+set(simApp.Fig, 'CloseRequestFcn', @CloseRequestFcn);
+
+% Load SitesPosition (using the old Sites.m file that will be written
+% as result of this function execution)
+Sites;
+
+% Add default Trajectory
+line([startPos(1);SitesPositions(:,1)],[startPos(2);SitesPositions(:,2)],...
+    'Color','b','LineStyle',':','LineWidth',2,'Parent',simApp.TrackView.Axes); %#ok<NODEF>
+
+% Initialize line that will be completed by this function
+hline = line(NaN,NaN,'Color','g','LineStyle','REPLACE_WITH_DASH_DASH',...
+    'LineWidth',4,'Parent',simApp.TrackView.Axes); 
+
+% Display SitesPositions
+for idx = 1:size(SitesPositions,1)
+    line(SitesPositions(idx,1),SitesPositions(idx,2),'Color','g',...
+        'LineStyle','none','Marker','o','MarkerEdgeColor',[1 0 0],...
+        'MarkerFaceColor',[1 0.5 0],'MarkerSize',20,...
+        'ButtonDownFcn',{@f_clickPosition,simApp},...
+        'Parent',simApp.TrackView.Axes);
+end
+line(startPos(1),startPos(2),'Color','g',...
+    'LineStyle','none','Marker','o','MarkerEdgeColor',1-[1 0 0],...
+    'MarkerFaceColor',1-[1 0.5 0],'MarkerSize',20,...
+    'Parent',simApp.TrackView.Axes); 
+text(startPos(1),startPos(2),num2str(0),'Color',[1 0 0],'FontWeight','bold',...
+    'FontSize',20,'Parent',simApp.TrackView.Axes);
+setappdata(simApp.Fig,'neworder',startPos(:)');
+
+% Save data (original position and new trajectory in figure workspace
+setappdata(simApp.Fig,'originalSitesPositions',SitesPositions);
+setappdata(simApp.Fig,'newTargetTrajectory',hline);
+
+end
+
+function f_clickPosition(hObject,~,simApp)
+% f_clickPosition Callback for click on point
+
+% Get point position (X and Y)
+x = get(hObject,'XData');
+y = get(hObject,'YData');
+
+% Update order by adding point in list
+neworder = [getappdata(simApp.Fig,'neworder') ;x y];
+setappdata(simApp.Fig,'neworder',neworder);
+
+% Get trajectory
+hline = getappdata(simApp.Fig,'newTargetTrajectory');
+
+% Update trajectory
+set(hline,'XData',neworder(:,1),'YData',neworder(:,2));
+
+% Update object color
+set(hObject,'MarkerEdgeColor',1-get(hObject,'MarkerEdgeColor'),...
+    'MarkerFaceColor',1-get(hObject,'MarkerFaceColor'),'ButtonDownFcn','');
+
+% Display order number on point
+text(x,y,num2str(size(neworder,1)-1),'Color',[1 0 0],'FontWeight','bold',...
+    'FontSize',20,'Parent',simApp.TrackView.Axes);
+
+end
+
+function fMySave(filename,SitesPositions)
+% fMySave Save target in M-file
+%
+
+% Get current date
+[year,month,day,hour,minute,second] = datevec(now) ;
+
+% Make a copy of the previous target definition file
+oldfileName = sprintf('%s_%4d_%02d_%02d_%02dH%02dM%06.3fs.bak',...
+    filename ,year,month,day,hour,minute,second );
+movefile(filename,oldfileName,'f');
+
+% Open new file for writing
+fid = fopen(filename,'wt');
+try %#ok<TRYNC>
+    
+    % Set file header (to write that file is autogenerated and print the
+    % date)
+    fprintf(fid,'%% File Autogenerate by function %s\n',mfilename);
+    fprintf(fid,'%% Date %s\n',datestr(now,'dddd dd mmmm yyyy HH:MM:SS'));
+    
+    % Write vector SitesPositions with new values
+    fprintf(fid,'SitesPositions = single([...\n');
+    fprintf(fid,'\t%4.0f,%4.0f;...\n',SitesPositions');
+    fprintf(fid,'\t]);');
+end
+
+% Close file
+fclose(fid);
+
+% Export SitesPositions vector in base workspace
+assignin('base','SitesPositions',SitesPositions);
+
+end
+
+function CloseRequestFcn(hObject,~)
+% CloseRequestFcn Callback when window is closed
+
+% Get target position (to have the length of the vector = number of targets)
+% Get ordered list of targets
+originalSitesPositions=getappdata(hObject,'originalSitesPositions');
+neworder=getappdata(hObject,'neworder');
+neworder(1,:) = [] ;
+
+if length(neworder)==length(originalSitesPositions)
+    
+    % Ask for confirmation before saving file
+    answer = questdlg('Do you want to save the order of targets', ...
+        'Saving confirmation', 'Yes', 'No', 'Yes');
+    
+    if strcmp(answer,'Yes')
+        
+        % Save new position file
+        fMySave(which('Sites.m'),neworder);
+                
+    end
+    
+else
+    
+    % Display a message
+    uiwait(msgbox('No data saved'));
+    
+end
+
+% Delete figure
+delete(hObject)
+
+end
+
+
+##### SOURCE END #####
+--></body></html>
