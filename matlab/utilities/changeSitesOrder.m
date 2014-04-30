@@ -1,3 +1,4 @@
+% Copyright 2014 The MathWorks, Inc.
 function changeSitesOrder()
 %% DESCRIPTION
 % La fonction changeOrderTargetPoint vous permet de changer graphiquement

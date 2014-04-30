@@ -1,3 +1,4 @@
+% Copyright 2014 The MathWorks, Inc.
 function plotFigure(X, T, T_found, t_last, t, T_located,pcam,lcam,robotheta)
 % internal function 
 % Process robot localisation information from the simulation model

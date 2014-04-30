@@ -1,3 +1,4 @@
+% Copyright 2014 The MathWorks, Inc.
 classdef ProgressViewer < handle
     % ProgressViewer  - internal class - display component for progress
     % information

@@ -1,3 +1,4 @@
+% Copyright 2014 The MathWorks, Inc.
 classdef RpiController < handle
     %RpiController App for interacting with the Robot Tracking System 
     

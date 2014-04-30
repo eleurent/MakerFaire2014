@@ -1,3 +1,4 @@
+% Copyright 2014 The MathWorks, Inc.
 classdef TrackViewer < handle
     % TrackViewer  - internal class - display component for the followed track
 

@@ -1,3 +1,4 @@
+% Copyright 2014 The MathWorks, Inc.
 classdef VideoViewer < handle
     % VideoViewer  - internal class - display component for video feed
     properties

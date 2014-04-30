@@ -1,3 +1,4 @@
+% Copyright 2014 The MathWorks, Inc.
 %% loadRobotParameters.m
 % This MATLAB script populates the workspace with parameters related to the
 % simulation of the Mars rover robot. It specifies plant model parameters to

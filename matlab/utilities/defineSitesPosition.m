@@ -1,3 +1,4 @@
+% Copyright 2014 The MathWorks, Inc.
 function defineSitesPosition()
 
 %% DESCRIPTION

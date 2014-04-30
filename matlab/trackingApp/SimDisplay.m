@@ -1,3 +1,4 @@
+% Copyright 2014 The MathWorks, Inc.
 classdef SimDisplay < handle
     %SimDisplay Ui for displaying the simulation runs of the Robot tracking
     %system
