@@ -1,0 +1,9 @@
+v1 issues:
+
+- increase PTH08080 holes size
+- Add power and ground holes for soldering in wires (like for going to motor shield power input)
+- Reverse power and ground on servo connectors
+- Increase size of power and gnd input holes to accomodate large power wires, put lots of space in between pads
+
+
+
