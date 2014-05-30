@@ -1,1 +1,17 @@
-lalalalalalalalalala
+Améliorations apportées
+
+** InputProcessing **
+- Utilisation d'un Extended Kalman Filter pour estimer la position et l'orientation en recalant l'odométrie par la vision
+- Le recalage utilise toutes les zones vues par la caméra, et non plus juste la destination comme dans la simulation originale
+- Meilleures performances avec l'UKF, mais problème de la décomposition cholesky
+- Prise en compte du délai de la caméra dans l'incorporation des mesures de l'EKF
+- Commande de distance envoyée en relatif pour gérer les dépassements. 
+- Rotation pendant l'attente à une zone pour s'orienter vers la prochaine
+
+** Controller **
+- Réglage des gains plus agressif
+- Priorisation de la commande de bearing par saturation dynamique de la commande de distance (au maximum possible permettant d'imposer le différentiel de la commande de bearing). 
+- Ajout d'un terme intégral pour résoudre les blocages a proximité d'une cible (effort des roues insuffisant pour avancer)
+
+** Strategie **
+- Solveur du voyageur de commerce par algorithme génétique
