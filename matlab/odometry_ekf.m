@@ -1,19 +1,21 @@
 % MakerFaire Paris 2014
 % Martin de Gourcuff, Alexandre Lefort, Edouard Leurent
-function M_out = odometry_ukf2(el,er,WheelRadius,AxleLength,EncRes,Targets,DistanceCameraTargets,BearingCameraTargets,N_delay)
-persistent P M A Q R bruit_odometrie bruit_bearing bruit_distance f_param M_history P_history encoders_history i_now
+function M_out = odometry_ekf(EncoderLeft,EncoderRight,startPos,theta0,WheelRadius,AxleLength,EncRes,Targets,DistanceCameraTargets,BearingCameraTargets,N_delay)
+persistent P M A Q R bruit_odometrie bruit_bearing bruit_distance f_param EncoderLeftPrev EncoderRightPrev M_history P_history encoders_history i_now
 
 %% Init
 if isempty(P)
   bruit_odometrie = 2*pi/EncRes;
   bruit_bearing = 0.05;
   bruit_distance = 0.05;
-  M = [50; 50; 0];
+  M = [startPos'; theta0*pi/180];
   P = diag([0.0001 0.0001 0.0001]);
   Q = diag((bruit_odometrie*[WheelRadius/2;WheelRadius/2;WheelRadius/AxleLength]).^2);
   M_history = zeros(3,1,N_delay);
   P_history = zeros(3,3,N_delay);
   encoders_history = zeros(2,N_delay);
+  EncoderLeftPrev=0;
+  EncoderRightPrev=0;
   for i=1:N_delay
       M_history(:,i) = M;
       P_history(:,:,i) = P;
@@ -22,7 +24,9 @@ if isempty(P)
 end
 
 % Start by storing encoders values
-encoders_history(:,i_now) = [el;er];
+encoders_history(:,i_now) = [EncoderLeft-EncoderLeftPrev;EncoderRight-EncoderRightPrev];
+EncoderLeftPrev = double(EncoderLeft);
+EncoderRightPrev = double(EncoderRight);
 
 %% EKF Update
 didUpdate = false;
