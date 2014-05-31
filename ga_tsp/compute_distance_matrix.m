@@ -8,14 +8,6 @@ function[matrix] = compute_distance_matrix(point_list,list_size)
             dx=point_list(2*i-1,1) - point_list(2*j-1,1);
             dy=point_list(2*i,1)   - point_list(2*j,1);
             matrix(i,j) = sqrt(dx*dx + dy*dy);
-            if(i == 1 && j == 9)
-                dx
-                dy
-                point_list(2*i-1,1)
-                point_list(2*j-1,1)
-                point_list(2*i,1)
-                point_list(2*j,1)
-            end
             
         end
     end
