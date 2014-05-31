@@ -39,7 +39,7 @@ function [point_list_output] = ga_tsp(point_list_input)
     
     point_list_output = point_list_input;
     for i=1:list_size-1
-        point_list_output(i,1) = point_list_input(optimal_path(i+1));
+        point_list_output(i,:) = point_list_input(optimal_path(i+1),:);
     end
 end
 
