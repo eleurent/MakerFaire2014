@@ -1,13 +1,19 @@
-This Simulink project contains the files for the Mathworks Mars Rover robot competition. The primary model of interest is the simulation model, but also included is a model for execution on an Arduino DUE. The Arduino model uses a number of S-functions for use of the peripherals, including the I2C interface for communication with a Raspberry Pi. More detail on each of these models and the robot itself is included in the project documentation.
+================== Améliorations ==================
+01/06/2014 - Alexandre Lefort, Martin de Gourcuff, Edouard Leurent
 
-================== Quick Start ==================
-1. Open the project by double clicking the MakerFaire.prj file in MATLAB
-2. Open SimulationModel.slx
-3. Press Run to start simulation
+=== InputProcessing ===
+- Implémentation d'un Extended Kalman Filter pour estimer la position et l'orientation en recalant l'odométrie par la vision
+- Implémentation d'un Unscented Kalman Filter dans le même but, plus efficace que l'EKF pour recaler après une dérive importante (si on rajoute du bruit dans les encodeurs, par exemple), mais plus lourd en temps de calcul.
+- Le recalage par EKF/UKF utilise toutes les zones vues par la caméra, et non plus juste la destination comme dans la simulation originale
+- Prise en compte du délai de la caméra (0.3s) dans l'incorporation des mesures de l'EKF/UKF
+- Commande de distance envoyée en relatif pour gérer les dépassements et demis-tours
+- Rotation pendant l'attente à une zone pour s'orienter vers la prochaine
 
-================== Requirements ==================
-MATLAB r2014a on Windows 7
+=== Controller ===
+- Réglage des gains plus agressif
+- Priorisation de la commande de bearing par saturation dynamique de la commande de distance au maximum possible permettant d'imposer le différentiel de la commande de bearing
+- Ajout de termes intégraux en distance et en angle pour résoudre les blocages à proximité d'une cible (effort des roues dans la dead band, insuffisant pour avancer)
+- Ajout d'un terme dérivé en angle à l'arrêt, pour limiter les dépassements
 
-================== Release Notes ==================
-
-07/04/2014 v1.0 First Release
+=== Stratégie ===
+- Solveur du voyageur de commerce par algorithme génétique, qu'on exécute à la place de changeSitesOrder.m pour trouver le plus court chemin (script matlab/utilities/computeTSPSitesOrder.m)
