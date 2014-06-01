@@ -9,11 +9,15 @@
 - Commande de distance envoyée en relatif pour gérer les dépassements et demis-tours
 - Rotation pendant l'attente à une zone pour s'orienter vers la prochaine
 
-=== Controller ===
+=== Controller === 
 - Réglage des gains plus agressif
-- Priorisation de la commande de bearing par saturation dynamique de la commande de distance au maximum possible permettant d'imposer le différentiel de la commande de bearing
-- Ajout de termes intégraux en distance et en angle pour résoudre les blocages à proximité d'une cible (effort des roues dans la dead band, insuffisant pour avancer)
+- Priorisation de la commande d'angle par saturation dynamique de la commande de distance au maximum possible permettant d'imposer le différentiel de la commande de bearing
+- Ajout de termes intégraux en distance et en angle pour résoudre les blocages à proximité d'une cible (effort des roues dans la dead band, insuffisant pour avancer). 
+  Le gain intégral est bridé en angle afin de converger plus rapidement et d'éviter le phénomène de wind-up
+  Le gain intégral en distance est mis à 0 pour le moment
 - Ajout d'un terme dérivé en angle à l'arrêt, pour limiter les dépassements
+- Deux jeux de gains différents pour le PID del'angle en fonction de l'état du robot (à l'arrêt sur un site ou en mouvement)
 
 === Stratégie ===
-- Solveur du voyageur de commerce par algorithme génétique, qu'on exécute à la place de changeSitesOrder.m pour trouver le plus court chemin (script matlab/utilities/computeTSPSitesOrder.m)
+- Solveur du voyageur de commerce par algorithme génétique, qu'on exécute à la place de changeSitesOrder.m pour trouver le plus court chemin 
+  Pour ce faire il suffit de lancer le script matlab/utilities/computeTSPSitesOrder.m
