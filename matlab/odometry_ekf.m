@@ -10,7 +10,7 @@ if isempty(P)
   bruit_distance = 0.05;
   M = [startPos'; theta0*pi/180];
   P = diag([0.0001 0.0001 0.0001]);
-  Q = diag((bruit_odometrie*[WheelRadius/2;WheelRadius/2;WheelRadius/AxleLength]).^2);
+  Q = diag((bruit_odometrie*[(WheelRadius/100)/2;(WheelRadius/100)/2;(WheelRadius/100)/(AxleLength/100)]).^2);
   M_history = zeros(3,1,N_delay);
   P_history = zeros(3,3,N_delay);
   encoders_history = zeros(2,N_delay);
