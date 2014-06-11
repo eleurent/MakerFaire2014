@@ -15,8 +15,10 @@ root_dir = fileparts(fileparts(mfilename('fullpath')));
 addpath(fullfile(root_dir,'data')) % Parameters, Images
 addpath(fullfile(root_dir,'lib')) % Librairy of drivers for Robot
 addpath(fullfile(root_dir,'matlab'))
+addpath(fullfile(root_dir,'matlab','judge'))
 addpath(fullfile(root_dir,'matlab','trackingApp')) % Graphical Robot representation
 addpath(fullfile(root_dir,'matlab','utilities'))
+addpath(fullfile(root_dir,'matlab','calibration'))
 addpath(fullfile(root_dir,'model')) % SLX files
 
 % Create work directory if it doesn't already exist
@@ -36,7 +38,11 @@ clear root_dir
 
 % Display a message with a hyperlink to open model for simulation
 disp('Project initialization is completed.')
-disp('You can open <a href="matlab:SimulationModel">simulation model</a> (model/SimulationModel.slx)')
+disp('For simulation:')
+disp('	You can open <a href="matlab:SimulationModel">simulation model</a> (model/SimulationModel.slx)')
+disp('For robot run:')
+disp('  Check that team names are correct by editing <a href="matlab:edit teams.txt">teams.txt</a> (matlab/judge/teams.txt)')
+disp('  You can launch <a href="matlab:launch_judge">judge</a> (matlab/judge/launch_judge.m)')
 disp(' ')
 disp('To define new sites:')
 disp('Use function <a href="matlab:defineSitesPosition">defineSitesPosition</a> (matlab/utilities/defineSitesPosition.m)')

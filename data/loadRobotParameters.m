@@ -18,6 +18,8 @@ EncL_init = 0;          %Left encoder initialisation value [deg]
 EncRes = 636;           %Encoder resolution 636
 TauMotor = 0.1;         %Motor time constant
 
+slip_intensity = 0.001; % Estimated slip intensity
+
 %% Plant motor characteristics
 motorX = [-100.000000 -90.000000 -70.000000 -50.000000 -30.000000 -27.000000 27.000000 30.000000 50.000000 70.000000 90.000000 100.000000 ];
 motorL = [-967.207000 -900.359000 -783.375000 -618.344000 -325.884000 -0.000000 0.000000 325.884000 618.344000 783.375000 900.359000 967.207000 ];

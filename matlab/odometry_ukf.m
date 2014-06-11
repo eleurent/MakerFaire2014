@@ -5,7 +5,7 @@ persistent P M Q R bruit_odometrie bruit_bearing bruit_distance f_param EncoderL
 
 %% Init
 if isempty(P)
-  bruit_odometrie = 2*pi/EncRes;
+  bruit_odometrie = 2*pi/EncRes*100;
   bruit_bearing = 0.05;
   bruit_distance = 0.05;
   M = [startPos'; theta0*pi/180];
