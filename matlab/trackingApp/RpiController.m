@@ -67,6 +67,7 @@ classdef RpiController < handle
         function reset(obj)
             stop(obj);
             obj.Track = zeros(0,2);
+            obj.TrackEST = zeros(0,2);
             obj.TargetsFound = false(size(obj.Targets,1),1);
             obj.Time = zeros(0,1);
             obj.ElapsedTime = 0;

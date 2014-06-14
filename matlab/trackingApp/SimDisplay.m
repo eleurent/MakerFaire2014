@@ -9,6 +9,7 @@ classdef SimDisplay < handle
         TargetsLocated = zeros(0,2);
         TargetsFound = false(0,1);
         Track = zeros(0,2);
+        TrackEST = zeros(0,2);
         Time = zeros(0,1);
         ElapsedTime = 0;
         TimeLastFound = 0;
@@ -29,13 +30,14 @@ classdef SimDisplay < handle
     
     methods %open API
         function update(obj, position, targetPositions, targetsFound, ...
-                timeLastTargetFound, time, targetLocated,pcam,lcam,robotheta)
+                timeLastTargetFound, time, targetLocated,pcam,lcam,robotheta, positionEST, robothetaEST)
             % update Update display with new data
             % This updates the track progress displays and updates the
             % logged data
             obj.Targets = targetPositions;
             obj.TargetsLocated = targetLocated;
             obj.Track(end+1, :) = position;
+            obj.TrackEST(end+1, :) = positionEST;
             obj.Time(end+1) = time;
             
             obj.TargetsFound = targetsFound;
@@ -48,7 +50,7 @@ classdef SimDisplay < handle
             end
             
             % update views
-            updateTrackView(obj,pcam,lcam,robotheta);
+            updateTrackView(obj,pcam,lcam,robotheta,robothetaEST);
             updateProgressView(obj);
             updateTargetChecksum(obj);
         end
@@ -67,6 +69,7 @@ classdef SimDisplay < handle
             obj.TargetsLocated = zeros(0,2);
             obj.TargetsFound = false(0,1);
             obj.Track = zeros(0,2);
+            obj.TrackEST = zeros(0,2);
             obj.Time = zeros(0,1);
             obj.ElapsedTime = 0;
             obj.TimeLastFound = 0;
@@ -103,8 +106,8 @@ classdef SimDisplay < handle
     end
     
     methods (Access = private) %update methods
-        function updateTrackView(obj,pcam,lcam,bearing)
-            update(obj.TrackView, obj.Track, obj.Targets, obj.TargetsFound, obj.TargetsLocated,pcam,lcam,bearing)
+        function updateTrackView(obj,pcam,lcam,bearing,bearingEST)
+            update(obj.TrackView, obj.Track, obj.Targets, obj.TargetsFound, obj.TargetsLocated,pcam,lcam,bearing,obj.TrackEST,bearingEST)
         end
         
         function updateProgressView(obj)

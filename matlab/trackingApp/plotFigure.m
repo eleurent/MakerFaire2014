@@ -1,5 +1,5 @@
 % Copyright 2014 The MathWorks, Inc.
-function plotFigure(X, T, T_found, t_last, t, T_located,pcam,lcam,robotheta)
+function plotFigure(X, T, T_found, t_last, t, T_located,pcam,lcam,robotheta, XEST,robothetaEST)
 % internal function 
 % Process robot localisation information from the simulation model
 
@@ -9,4 +9,4 @@ simApp = SimDisplay.getInstance();
 T_located = T_located(T_located(:,1)>0,:);
 
 idx = (T(:,1) >= 0); %debuffer the list of target positions
-update(simApp, X, T(idx,:), T_found(idx), t_last, t, T_located,pcam,lcam,robotheta)
+update(simApp, X, T(idx,:), T_found(idx), t_last, t, T_located,pcam,lcam,robotheta,XEST,robothetaEST)

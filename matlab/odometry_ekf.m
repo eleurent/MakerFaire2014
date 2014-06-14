@@ -1,6 +1,6 @@
 % MakerFaire Paris 2014
 % Martin de Gourcuff, Alexandre Lefort, Edouard Leurent
-function M_out = odometry_ekf(EncoderLeft,EncoderRight,startPos,theta0,WheelRadius,AxleLength,EncRes,Targets,DistanceCameraTargets,BearingCameraTargets,N_delay)
+function M_out = odometry_ekf(EncoderLeft,EncoderRight,startPos,theta0,WheelRadius,AxleLength,EncRes,Targets,DistanceCameraTargets,BearingCameraTargets,N_delay,slip_intensity)
 persistent P M A Q R bruit_odometrie bruit_bearing bruit_distance f_param EncoderLeftPrev EncoderRightPrev M_history P_history encoders_history i_now
 
 %% Init
@@ -78,6 +78,12 @@ else
     nPredictions = 1;
 end
 for i = 1:nPredictions
+    Ts = 0.1;
+    bruit_glissement_L = double(encoders_history(1,i_now))*2*pi/EncRes -Ts*pi/180*atan(double(encoders_history(1,i_now))*360/EncRes/Ts*(pi/4*slip_intensity))/(pi/4*slip_intensity);
+    bruit_glissement_R = double(encoders_history(2,i_now))*2*pi/EncRes -Ts*pi/180*atan(double(encoders_history(2,i_now))*360/EncRes/Ts*(pi/4*slip_intensity))/(pi/4*slip_intensity);
+    bruit_odometrie = (abs(bruit_glissement_L) + abs(bruit_glissement_R)) + 2*pi/EncRes;
+    Q = diag((bruit_odometrie*[WheelRadius/2;WheelRadius/2;WheelRadius/AxleLength]).^2);
+    
     f_param = [double(encoders_history(1,i_now))*2*pi/EncRes;double(encoders_history(2,i_now))*2*pi/EncRes;WheelRadius;AxleLength];
     A = double(odometry_jacobian(M, f_param));
     M = double(odometry_transition(M,f_param));

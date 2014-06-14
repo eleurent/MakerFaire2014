@@ -4,6 +4,7 @@ classdef TrackViewer < handle
 
     properties (Access = private)
         Theta = 0;
+        ThetaEST = 0;
         FlashDuration = 5;
     end
     properties
@@ -14,11 +15,13 @@ classdef TrackViewer < handle
     properties (Access = private)
         VideoView
         Track
+        TrackEST
         TargetsFound
         TargetsRemaining
         TargetsLocated
         TargetsLabel
         Robot
+        RobotEST
         Highlight
         VisibilityPatch
         BackGround
@@ -30,9 +33,10 @@ classdef TrackViewer < handle
             obj.createApp();
         end
         
-        function update(obj, track, targets, found, located,pcam,lcam,robotheta)
+        function update(obj, track, targets, found, located,pcam,lcam,robotheta,trackEST, robothetaEST)
             
             set(obj.Track, 'XData',track(:,1),'YData',track(:,2));
+            set(obj.TrackEST, 'XData',trackEST(:,1),'YData',trackEST(:,2));
             set(obj.TargetsFound,'XData',targets(found,1),'YData',targets(found,2));
             set(obj.TargetsRemaining,'XData',targets(~found,1),'YData',targets(~found,2));
             set(obj.TargetsLocated,'XData',located(:,1),'YData',located(:,2));
@@ -61,15 +65,21 @@ classdef TrackViewer < handle
                 Mx = makehgtform('translate',[-10 -10 0]); %Move out of view
             else
                 pos = track(end,:);
+                posEST = trackEST(end,:);
                 Mx = makehgtform('translate',[pos(1), pos(2), 0]);
+                MxEST = makehgtform('translate',[posEST(1), posEST(2), 0]);
                 %if size(track,1)>=2 && sum((pos-track(end-1,:)).^2) >= 0.015^2 % O.Dufour (08/04/2014): Commented to update robot direction everytime
                     obj.Theta = robotheta / 180*pi;
                 %end
                 Rx = makehgtform('zrotate',obj.Theta);
+                obj.ThetaEST = robothetaEST / 180*pi;
+                RxEST = makehgtform('zrotate',obj.ThetaEST);
                 %Mx = Mx*Rx;
                 Mx = Mx*Rx*makehgtform('scale',1.3);
+                MxEST = MxEST*RxEST*makehgtform('scale',1.3);
             end
             set(obj.Robot,'Matrix',Mx);
+            set(obj.RobotEST,'Matrix',MxEST);
             drawnow()
 
             % adjust hilight icon
@@ -116,7 +126,9 @@ classdef TrackViewer < handle
             grid(obj.Axes);
             
             obj.Track = line(NaN,NaN,'Color','b','LineStyle','--',...
-                'LineWidth',2,'Parent',obj.Axes);            
+                'LineWidth',2,'Parent',obj.Axes);
+            obj.TrackEST = line(NaN,NaN,'Color','g','LineStyle','-.',...
+                'LineWidth',2,'Parent',obj.Axes);  
             obj.TargetsFound = line(NaN,NaN,'Color',[0 0.6 0],'LineStyle','none',...
                 'lineWidth',2,'Marker','o','MarkerSize',15,...
                 'MarkerFaceColor',[0 0.95 0],'Parent',obj.Axes);
@@ -127,6 +139,7 @@ classdef TrackViewer < handle
             obj.TargetsLocated = line(NaN,NaN,'Color',[0 0 0.8],'LineStyle','none',...
                 'LineWidth',3,'Marker','+','MarkerSize',18,'Parent',obj.Axes);            
             obj.Robot = hgtransform('Parent',obj.Axes);
+            obj.RobotEST = hgtransform('Parent',obj.Axes);
             obj.VisibilityPatch = patch(NaN,NaN,[0 0 1],'FaceAlpha',0.5,'Parent',obj.Axes);
             % scale image and centre ball at [0 0]
             
@@ -134,6 +147,8 @@ classdef TrackViewer < handle
             robot_width = 24; % Previous value = 9
             surf(linspace(0,robot_length,191)-robot_length, linspace(0,robot_width,231)-robot_width/2, zeros(231,191),...
                im2double(imread('robot_dessus.jpg')),'EdgeColor','none','Parent',obj.Robot);
+            surf(linspace(0,robot_length,191)-robot_length, linspace(0,robot_width,231)-robot_width/2, zeros(231,191),...
+               im2double(imread('robot_dessus_EST.png')),'EdgeColor','none','Parent',obj.RobotEST);
         end
     end
     
