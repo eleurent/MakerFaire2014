@@ -5,7 +5,7 @@ persistent P M A Q R bruit_odometrie bruit_bearing bruit_distance f_param Encode
 
 %% Init
 if isempty(P)
-  bruit_odometrie = 2*pi/EncRes;
+  bruit_odometrie = 2*(2*pi/EncRes);
   bruit_bearing = 0.05;
   bruit_distance = 0.05;
   M = [startPos'; theta0*pi/180];
@@ -81,7 +81,7 @@ for i = 1:nPredictions
     Ts = 0.1;
     bruit_glissement_L = double(encoders_history(1,i_now))*2*pi/EncRes -Ts*pi/180*atan(double(encoders_history(1,i_now))*360/EncRes/Ts*(pi/4*slip_intensity))/(pi/4*slip_intensity);
     bruit_glissement_R = double(encoders_history(2,i_now))*2*pi/EncRes -Ts*pi/180*atan(double(encoders_history(2,i_now))*360/EncRes/Ts*(pi/4*slip_intensity))/(pi/4*slip_intensity);
-    bruit_odometrie = (abs(bruit_glissement_L) + abs(bruit_glissement_R)) + 2*pi/EncRes;
+    bruit_odometrie = (abs(bruit_glissement_L) + abs(bruit_glissement_R)) + 2*(2*pi/EncRes);
     Q = diag((bruit_odometrie*[WheelRadius/2*abs(cos(M(3)));WheelRadius/2*abs(sin(M(3)));WheelRadius/AxleLength]).^2);
     
     f_param = [double(encoders_history(1,i_now))*2*pi/EncRes;double(encoders_history(2,i_now))*2*pi/EncRes;WheelRadius;AxleLength];
